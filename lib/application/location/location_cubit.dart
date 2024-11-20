@@ -56,7 +56,6 @@ class LocationCubit extends Cubit<LocationState> {
       for (int i = 0; i < marks.length; i++) {
         await Future.delayed(Duration(milliseconds: 500));
         _newMarkers.add(marks[i]);
-        print("marker i=> $i ${_newMarkers.length}");
         emit(state.copyWith(markers: List<Marker>.from(_newMarkers)));
       }
     } else {
@@ -70,7 +69,6 @@ class LocationCubit extends Cubit<LocationState> {
       _newMarkers.clear();
       for (int i = 0; i < marks.length; i++) {
         await Future.delayed(Duration(milliseconds: 500));
-        print("marker i=> $i");
         _newMarkers.add(marks[i]);
         emit(state.copyWith(markers: List<Marker>.from(_newMarkers)));
       }

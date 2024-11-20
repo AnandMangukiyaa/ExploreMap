@@ -18,7 +18,7 @@ class MapPage extends StatefulWidget {
   State<MapPage> createState() => _MapPageState();
 }
 
-class _MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
+class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   AnimatedMapController? mapController;
   LocationCubit _locationCubit = GetIt.I<LocationCubit>();
   PermissionCubit _permissionCubit = GetIt.I<PermissionCubit>();
@@ -91,7 +91,14 @@ class _MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
         appBar: AppBar(
           title: const Text("Explore Map"),
         ),
-        floatingActionButton:  Column(
+        floatingActionButton:  BlocBuilder<LocationCubit, LocationState>(
+    buildWhen: (p, c) {
+    return p.isUserLocationReady != c.isUserLocationReady;
+    },
+    builder: (context, state) {
+    return !state.isUserLocationReady
+    ? const SizedBox.shrink()
+        : Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             GestureDetector(
@@ -151,7 +158,7 @@ class _MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
               ),
             ),
           ],
-        ),
+        );}),
         body: Stack(
           children: [
             Center(
@@ -161,7 +168,6 @@ class _MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
                   if(p.userLocation != c.userLocation){
                     _locationCubit.addMarkers();
                   }
-                  print("markers length = ${p.markers.length} ${c.markers.length}");
                   return true;//p.userLocation != c.userLocation || p.markers.isNotEmpty;
                 },
                 builder: (context, locationState) {
@@ -224,11 +230,9 @@ class _MapPageState extends State<MapPage> with SingleTickerProviderStateMixin {
                         bottom: 50,
                         child: CenterButton(
                           onPressed: () {
-                            mapController!.mapController.move(
-                              LatLng(state.userLocation.latitude,
-                                  state.userLocation.longitude),
-                              mapController!.mapController.camera.zoom,
-                            );
+                            mapController!.animateTo(dest:  LatLng(state.userLocation.latitude,
+                                state.userLocation.longitude),zoom:
+                              mapController!.mapController.camera.zoom,);
                           },
                         ),
                       );
@@ -249,7 +253,7 @@ class UserMarker extends StatefulWidget {
 }
 
 class _UserMarkerState extends State<UserMarker>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<double> sizeAnimation;
 
