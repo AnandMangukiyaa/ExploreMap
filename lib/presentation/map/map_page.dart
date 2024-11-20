@@ -263,6 +263,7 @@ class _UserMarkerState extends State<UserMarker>
       vsync: this,
       duration: const Duration(milliseconds: 1000),
     );
+
     sizeAnimation = Tween<double>(
       begin: 1,
       end: 50,
