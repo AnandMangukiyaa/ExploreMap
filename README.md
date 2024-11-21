@@ -1,4 +1,4 @@
-# flutter_assignment1
+# Explore Map
 
 A new Flutter project.
 
