@@ -18,7 +18,7 @@ class GeolocatorLocationService implements ILocationService {
 
   @override
   Future<PlaceInfo?> getPlaceFromLatLong(String lat, String long) async {
-    final apiKey = 'AIzaSyDhXwalCqX-6KWIF5PykjCMZnGNn9JUgdw';
+    final apiKey = 'YOUR_MAP_KEY';
     final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$long&key=$apiKey';
     print("api ====> $url");
     final response = await http.get(Uri.parse(url));
