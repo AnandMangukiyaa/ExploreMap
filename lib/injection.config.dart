@@ -44,7 +44,7 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i433.IPermissionService>(),
           gh<_i989.ApplicationLifeCycleCubit>(),
         ));
-    gh.factory<_i118.LocationCubit>(() => _i118.LocationCubit(
+    gh.lazySingleton<_i118.LocationCubit>(() => _i118.LocationCubit(
           gh<_i934.ILocationService>(),
           gh<_i984.PermissionCubit>(),
           gh<_i989.ApplicationLifeCycleCubit>(),

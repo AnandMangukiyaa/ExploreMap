@@ -4,8 +4,9 @@
     <uses-permission
         android:name="android.permission.INTERNET"/>
     <application
-        android:label="flutter_assignment1"
+        android:label="Explore Map"
         android:name="${applicationName}"
+        android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -35,7 +36,7 @@
             android:name="flutterEmbedding"
             android:value="2" />
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value=<YOUR_MAP_API_KEY>/>
+            android:value="AIzaSyDhXwalCqX-6KWIF5PykjCMZnGNn9JUgdw"/>
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

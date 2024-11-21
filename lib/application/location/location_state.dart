@@ -4,11 +4,13 @@ part of 'location_cubit.dart';
 class LocationState with _$LocationState {
   const factory LocationState({
     required LocationModel userLocation,
-    required List<Marker> markers
+    required List<Marker> markers,
+    required PlaceInfo placeInfo,
   }) = _LocationState;
   factory LocationState.initial() => LocationState(
         userLocation: LocationModel.empty(),
-        markers: []
+        markers: [],
+        placeInfo: PlaceInfo.empty()
       );
   const LocationState._();
   bool get isUserLocationReady => userLocation != LocationModel.empty();

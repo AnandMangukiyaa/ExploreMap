@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_assignment1/application/location/location_cubit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get_it/get_it.dart';
+import 'package:latlong2/latlong.dart';
 
 class AnimationMarker extends StatefulWidget {
   final String child;
-  const AnimationMarker(this.child,{super.key});
+  final LatLng location;
+  const AnimationMarker(this.child,this.location,{super.key});
 
   @override
   State<AnimationMarker> createState() => AnimationMarkerState();
@@ -13,6 +17,7 @@ class AnimationMarkerState extends State<AnimationMarker>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<double> sizeAnimation;
+  LocationCubit _locationCubit = GetIt.I<LocationCubit>();
 
   @override
   void initState() {
@@ -47,7 +52,11 @@ class AnimationMarkerState extends State<AnimationMarker>
     child: AnimatedBuilder(
       animation: sizeAnimation,
       builder: (context, child) {
-        return SvgPicture.asset(widget.child,height: 50 * sizeAnimation.value,width: 50 *sizeAnimation.value,);
+        return GestureDetector(
+          onTap: (){
+            _locationCubit.getPlaceInfoFromLatLang(widget.location);
+          },
+            child: SvgPicture.asset(widget.child,height: 50 * sizeAnimation.value,width: 50 *sizeAnimation.value,));
       },
     )));
   }

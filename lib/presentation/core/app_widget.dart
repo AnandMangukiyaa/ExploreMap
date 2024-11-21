@@ -24,7 +24,7 @@ class AppWidget extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<LocationCubit>(),
-          lazy: false,
+          lazy: true,
         ),
       ],
       child: MaterialApp(

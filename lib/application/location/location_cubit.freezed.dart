@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LocationState {
   LocationModel get userLocation => throw _privateConstructorUsedError;
   List<Marker> get markers => throw _privateConstructorUsedError;
+  PlaceInfo get placeInfo => throw _privateConstructorUsedError;
 
   /// Create a copy of LocationState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,9 +33,11 @@ abstract class $LocationStateCopyWith<$Res> {
           LocationState value, $Res Function(LocationState) then) =
       _$LocationStateCopyWithImpl<$Res, LocationState>;
   @useResult
-  $Res call({LocationModel userLocation, List<Marker> markers});
+  $Res call(
+      {LocationModel userLocation, List<Marker> markers, PlaceInfo placeInfo});
 
   $LocationModelCopyWith<$Res> get userLocation;
+  $PlaceInfoCopyWith<$Res> get placeInfo;
 }
 
 /// @nodoc
@@ -54,6 +57,7 @@ class _$LocationStateCopyWithImpl<$Res, $Val extends LocationState>
   $Res call({
     Object? userLocation = null,
     Object? markers = null,
+    Object? placeInfo = null,
   }) {
     return _then(_value.copyWith(
       userLocation: null == userLocation
@@ -64,6 +68,10 @@ class _$LocationStateCopyWithImpl<$Res, $Val extends LocationState>
           ? _value.markers
           : markers // ignore: cast_nullable_to_non_nullable
               as List<Marker>,
+      placeInfo: null == placeInfo
+          ? _value.placeInfo
+          : placeInfo // ignore: cast_nullable_to_non_nullable
+              as PlaceInfo,
     ) as $Val);
   }
 
@@ -76,6 +84,16 @@ class _$LocationStateCopyWithImpl<$Res, $Val extends LocationState>
       return _then(_value.copyWith(userLocation: value) as $Val);
     });
   }
+
+  /// Create a copy of LocationState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PlaceInfoCopyWith<$Res> get placeInfo {
+    return $PlaceInfoCopyWith<$Res>(_value.placeInfo, (value) {
+      return _then(_value.copyWith(placeInfo: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -86,10 +104,13 @@ abstract class _$$LocationStateImplCopyWith<$Res>
       __$$LocationStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({LocationModel userLocation, List<Marker> markers});
+  $Res call(
+      {LocationModel userLocation, List<Marker> markers, PlaceInfo placeInfo});
 
   @override
   $LocationModelCopyWith<$Res> get userLocation;
+  @override
+  $PlaceInfoCopyWith<$Res> get placeInfo;
 }
 
 /// @nodoc
@@ -107,6 +128,7 @@ class __$$LocationStateImplCopyWithImpl<$Res>
   $Res call({
     Object? userLocation = null,
     Object? markers = null,
+    Object? placeInfo = null,
   }) {
     return _then(_$LocationStateImpl(
       userLocation: null == userLocation
@@ -117,6 +139,10 @@ class __$$LocationStateImplCopyWithImpl<$Res>
           ? _value._markers
           : markers // ignore: cast_nullable_to_non_nullable
               as List<Marker>,
+      placeInfo: null == placeInfo
+          ? _value.placeInfo
+          : placeInfo // ignore: cast_nullable_to_non_nullable
+              as PlaceInfo,
     ));
   }
 }
@@ -125,7 +151,9 @@ class __$$LocationStateImplCopyWithImpl<$Res>
 
 class _$LocationStateImpl extends _LocationState {
   const _$LocationStateImpl(
-      {required this.userLocation, required final List<Marker> markers})
+      {required this.userLocation,
+      required final List<Marker> markers,
+      required this.placeInfo})
       : _markers = markers,
         super._();
 
@@ -140,8 +168,11 @@ class _$LocationStateImpl extends _LocationState {
   }
 
   @override
+  final PlaceInfo placeInfo;
+
+  @override
   String toString() {
-    return 'LocationState(userLocation: $userLocation, markers: $markers)';
+    return 'LocationState(userLocation: $userLocation, markers: $markers, placeInfo: $placeInfo)';
   }
 
   @override
@@ -151,12 +182,14 @@ class _$LocationStateImpl extends _LocationState {
             other is _$LocationStateImpl &&
             (identical(other.userLocation, userLocation) ||
                 other.userLocation == userLocation) &&
-            const DeepCollectionEquality().equals(other._markers, _markers));
+            const DeepCollectionEquality().equals(other._markers, _markers) &&
+            (identical(other.placeInfo, placeInfo) ||
+                other.placeInfo == placeInfo));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, userLocation, const DeepCollectionEquality().hash(_markers));
+  int get hashCode => Object.hash(runtimeType, userLocation,
+      const DeepCollectionEquality().hash(_markers), placeInfo);
 
   /// Create a copy of LocationState
   /// with the given fields replaced by the non-null parameter values.
@@ -170,13 +203,16 @@ class _$LocationStateImpl extends _LocationState {
 abstract class _LocationState extends LocationState {
   const factory _LocationState(
       {required final LocationModel userLocation,
-      required final List<Marker> markers}) = _$LocationStateImpl;
+      required final List<Marker> markers,
+      required final PlaceInfo placeInfo}) = _$LocationStateImpl;
   const _LocationState._() : super._();
 
   @override
   LocationModel get userLocation;
   @override
   List<Marker> get markers;
+  @override
+  PlaceInfo get placeInfo;
 
   /// Create a copy of LocationState
   /// with the given fields replaced by the non-null parameter values.

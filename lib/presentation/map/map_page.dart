@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_assignment1/domain/location/place_info.dart';
 import 'package:flutter_assignment1/presentation/marker/animatation_marker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -77,6 +78,51 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
             );
           },
         ),
+        BlocListener<LocationCubit, LocationState>(
+          bloc: _locationCubit,
+          listenWhen: (p,c){
+            return p.placeInfo != c.placeInfo;
+        },
+          listener: (BuildContext context, LocationState state) {
+            print("Place Info : ${state.placeInfo?.placeName}");
+            if(state.placeInfo != null && state.placeInfo != PlaceInfo.empty()){
+            showModalBottomSheet( context: context,
+                isScrollControlled: false,
+                elevation: 0,
+                isDismissible: true,
+                enableDrag: true,
+                backgroundColor: Colors.white,
+                barrierColor: Colors.black.withOpacity(0.2),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(24),topRight: Radius.circular(24)),
+                ), builder: (ctx){
+                     return Padding(
+                         padding: EdgeInsets.all(20),
+                       child: Column(
+                         mainAxisSize: MainAxisSize.min,
+                         children: [
+                           Align(
+                             alignment: Alignment.topCenter,
+                             child: Container(
+                               width: 64,
+                               height: 4,
+                               decoration: BoxDecoration(
+                                   color: Colors.grey,
+                                   borderRadius: BorderRadius.circular(4)
+                               ),
+                             ),
+                           ),
+                           SizedBox(height: 40,),
+                           Text(state.placeInfo!.placeName.split(",").first,style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,color: Colors.black),),
+                           SizedBox(height: 24,),
+                           Text(state.placeInfo!.placeName,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Colors.black),),
+                           SizedBox(height: 24,),
+                         ],
+                       ),
+                     );
+            });
+          }
+        },),
         BlocListener<PermissionCubit, PermissionState>(
           bloc: _permissionCubit,
             listenWhen: (p, c) =>
